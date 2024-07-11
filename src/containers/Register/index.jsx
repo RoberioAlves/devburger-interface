@@ -16,9 +16,10 @@ import {
 
 import { Button } from '../../components/Button';
 
-export function Login() {
+export function Register() {
   const schema = yup
     .object({
+      name: yup.string().required('O nome é obrigatório'),
       email: yup
         .string()
         .email('Digite um email válido!')
@@ -27,6 +28,10 @@ export function Login() {
         .string()
         .min(6, 'A senha deve ter no minimo 6 caractere')
         .required('Digite a senha correta.'),
+      confirmPassword: yup
+        .string()
+        .oneOf([yup.ref('password')], 'As senha devem ser iguais')
+        .required('Confirme sua senha'),
     })
     .required();
 
@@ -41,19 +46,29 @@ export function Login() {
   console.log(errors);
 
   const onSubmit = async data => {
-    const response = await toast.promise(
-      api.post('/session', {
-        email: data.email,
-        password: data.password,
-      }),
-      {
-      pending: 'Verificando seus dados',
-      success: 'Seja Bem-Vindo(a)! 👌',
-      error: 'Email ou senha Incorretos 🤯'
+    try {
+      const { status } = await api.post(
+        '/users',
+        {
+          name: data.name,
+          email: data.email,
+          password: data.password,
+        },
+        {
+          validateStatus: () => true,
+        },
+      );
+
+      if (status === 200 || status === 201) {
+        toast.success('Conta criada com sucesso');
+      } else if (status === 409) {
+        toast.error('Email já existe! Tente novamente');
+      } else {
+        throw new Error();
       }
-    );
-    
-    console.log(response);
+    } catch (error) {
+      toast.error(' 😒 Falha no Sistema! Tente novamente');
+    }
   };
 
   return (
@@ -62,32 +77,32 @@ export function Login() {
         <img src={Logo} alt="Logo devburger" />
       </LeftContainer>
       <RightContainer>
-        <Title>
-          Olá, seja bem vindo ao <span>Dev Burguer!</span> <br />
-          Acesse com seu <span>Login e senha.</span>
-        </Title>
+        <Title>Criar Conta</Title>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <InputContainer>
-            <label>Email</label>
-            <input type="email" {...register('email')} />
+            <label>Name</label>
+            <input type="name" {...register('name')} />
             <p>{errors?.email?.message}</p>
+          </InputContainer>
+          <InputContainer>
+            <label>Email</label>
+            <input type="text" {...register('email')} />
+            <p>{errors?.name?.message}</p>
           </InputContainer>
           <InputContainer>
             <label>Senha</label>
             <input type="password" {...register('password')} />
             <p>{errors?.password?.message}</p>
-            <Link>
-            
-                Esquecir minha senha
-              
-            </Link>
+          </InputContainer>
+          <InputContainer>
+            <label>Confirm Senha</label>
+            <input type="password" {...register('confirmPassword')} />
+            <p>{errors?.confirmPassword?.message}</p>
           </InputContainer>
 
           <Button type="submit">Entrar</Button>
         </Form>
-        <Link>
-          Não possui conta? Clique aqui.
-        </Link>
+        <Link>Já possui conta? Clique aqui.</Link>
       </RightContainer>
     </Container>
   );
