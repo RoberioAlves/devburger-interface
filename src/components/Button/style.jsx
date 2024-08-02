@@ -9,6 +9,7 @@ export const ContainerButton = styled.button`
   background: #9758a6;
   color: #fff;
   font-family: 'Road Rage';
+  
 
   &:hover {
     background: #6f357c;

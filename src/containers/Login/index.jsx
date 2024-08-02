@@ -4,19 +4,22 @@ import * as yup from 'yup';
 import Logo from '../../assets/Logo 1.png';
 import { api } from '../../services/api';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 import {
   Container,
+  ContainerLink,
   Form,
   InputContainer,
   LeftContainer,
-  Link,
   RightContainer,
   Title,
+  Link,
 } from './style';
 
 import { Button } from '../../components/Button';
 
 export function Login() {
+  const navigate = useNavigate();
   const schema = yup
     .object({
       email: yup
@@ -47,12 +50,19 @@ export function Login() {
         password: data.password,
       }),
       {
-      pending: 'Verificando seus dados',
-      success: 'Seja Bem-Vindo(a)! 👌',
-      error: 'Email ou senha Incorretos 🤯'
-      }
+        pending: 'Verificando seus dados',
+        success: {
+          render() {
+            setTimeout(() => {
+              navigate('/')
+            }, 2000);
+            return `Seja Bem-Vindo(a)! 👌`;
+          },
+        },
+        error: 'Email ou senha Incorretos 🤯',
+      },
     );
-    
+
     console.log(response);
   };
 
@@ -76,18 +86,16 @@ export function Login() {
             <label>Senha</label>
             <input type="password" {...register('password')} />
             <p>{errors?.password?.message}</p>
-            <Link>
-            
-                Esquecir minha senha
-              
-            </Link>
+            <ContainerLink>
+              <Link>Esquecir minha senha</Link>
+            </ContainerLink>
           </InputContainer>
 
           <Button type="submit">Entrar</Button>
         </Form>
-        <Link>
-          Não possui conta? Clique aqui.
-        </Link>
+        <ContainerLink>
+          Não possui conta? <Link to="/cadastro">Clique aqui.</Link>
+        </ContainerLink>
       </RightContainer>
     </Container>
   );

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import BackgroundLogin from '../../assets/bg 1.svg';
 import Background from '../../assets/Padrão 1.svg';
-
+import { Link as ReactLink } from 'react-router-dom';
 export const Container = styled.div`
   display: flex;
   height: 100vh;
@@ -42,7 +42,7 @@ export const Title = styled.h2`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 5;
+  gap: 10px;
   padding: 20px;
   width: 100%;
   max-width: 400px;
@@ -76,7 +76,7 @@ export const InputContainer = styled.div`
   }
 `;
 
-export const Link = styled.a`
+export const ContainerLink = styled.div`
   display: flex;
   justify-content: end;
   color: #ffffff;
@@ -85,7 +85,13 @@ export const Link = styled.a`
   text-decoration: none;
   &:hover {
       color: red;
-    }
-  
-  
+  }    
+`;
+
+export const Link = styled(ReactLink)`
+  text-decoration: none;
+  color: #ffffff;
+  &:hover {
+    color: red;
+  }
 `;

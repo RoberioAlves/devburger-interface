@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import BackgroundLogin from '../../assets/bg 1.svg';
 import Background from '../../assets/Padrão 1.svg';
+import { Link as ReactLink } from 'react-router-dom';
 
 export const Container = styled.div`
   display: flex;
@@ -80,16 +81,18 @@ export const InputContainer = styled.div`
   }
 `;
 
-export const Link = styled.a`
+export const ContainerLink = styled.div`
   display: flex;
   justify-content: end;
   color: #ffffff;
   gap: 5px;
   font-size: 15px;
+`;
+
+export const Link = styled(ReactLink)`
   text-decoration: none;
+  color: #ffffff;
   &:hover {
-      color: red;
-    }
-  
-  
+    color: red;
+  }
 `;

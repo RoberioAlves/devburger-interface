@@ -4,19 +4,22 @@ import * as yup from 'yup';
 import Logo from '../../assets/Logo 1.png';
 import { api } from '../../services/api';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 import {
   Container,
+  ContainerLink,
   Form,
   InputContainer,
-  LeftContainer,
-  Link,
+  LeftContainer,  
   RightContainer,
   Title,
+  Link
 } from './style';
 
 import { Button } from '../../components/Button';
 
 export function Register() {
+  const navigate = useNavigate()
   const schema = yup
     .object({
       name: yup.string().required('O nome é obrigatório'),
@@ -60,8 +63,11 @@ export function Register() {
       );
 
       if (status === 200 || status === 201) {
+        setTimeout(() =>{
+          navigate('/login')
+        }, 2000);
         toast.success('Conta criada com sucesso');
-      } else if (status === 409) {
+      } else if (status === 400) {
         toast.error('Email já existe! Tente novamente');
       } else {
         throw new Error();
@@ -102,7 +108,7 @@ export function Register() {
 
           <Button type="submit">Entrar</Button>
         </Form>
-        <Link>Já possui conta? Clique aqui.</Link>
+        <ContainerLink><Link to='/login'>Já possui conta? Clique aqui.</Link></ContainerLink>
       </RightContainer>
     </Container>
   );
