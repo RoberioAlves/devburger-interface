@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import BackgroundLogin from '../../assets/bg 1.svg';
-import Background from '../../assets/Padrão 1.svg';
+import Background from '../../assets/background-fundo.svg';
 import { Link as ReactLink } from 'react-router-dom';
 
 export const Container = styled.div`

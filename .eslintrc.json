@@ -1,14 +1,20 @@
 {
+    "root": true,
     "env": {
         "browser": true,
         "es2021": true
     },
     "extends": [
+        "eslint:recommended",
         "plugin:react/recommended",
         "standard",
+        "plugin:react/jsx-runtime",
         "plugin:react-hooks/recommended",
         "plugin:prettier/recommended"
 
+    ],
+    "ignorePatterns":[
+        "dist"
     ],
     "parserOptions": {
         "ecmaFeatures": {
@@ -17,8 +23,13 @@
         "ecmaVersion": "latest",
         "sourceType": "module"
     },
+    "settings": {
+        "react": {
+            "version": "18.2"
+        }
+    },
     "plugins": [
-        "react",
+        "react-refresh",
         "eslint-plugin-import-helpers",
         "react-hooks",
         "prettier"

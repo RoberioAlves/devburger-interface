@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import BackgroundLogin from '../../assets/bg 1.svg';
-import Background from '../../assets/Padrão 1.svg';
+import Background from '../../assets/background-fundo.svg';
 import { Link as ReactLink } from 'react-router-dom';
 export const Container = styled.div`
   display: flex;
@@ -18,10 +18,15 @@ export const LeftContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  /* img {
+    width: 40%;
+  } */
 `;
 
 export const RightContainer = styled.div`
   background: url('${Background}');
+  background-size: cover;
   background-color: #1e1e1e;
   display: flex;
   align-items: center;
