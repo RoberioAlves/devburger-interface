@@ -87,13 +87,13 @@ export function Register() {
         <Form onSubmit={handleSubmit(onSubmit)}>
           <InputContainer>
             <label>Name</label>
-            <input type="name" {...register('name')} />
-            <p>{errors?.email?.message}</p>
+            <input type="text" {...register('name')} />
+            <p>{errors?.name?.message}</p>
           </InputContainer>
           <InputContainer>
             <label>Email</label>
-            <input type="text" {...register('email')} />
-            <p>{errors?.name?.message}</p>
+            <input type="email" {...register('email')} />
+            <p>{errors?.email?.message}</p>
           </InputContainer>
           <InputContainer>
             <label>Senha</label>

@@ -65,6 +65,7 @@ export function Login() {
     );
 
     localStorage.setItem('token', token)
+    
   };
 
   return (

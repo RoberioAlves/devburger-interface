@@ -15,6 +15,7 @@ h1 {
   position: absolute;
   right: 20%;
   top: 10%;
+  text-align: center;
 }
   
 `;
